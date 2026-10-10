@@ -1,0 +1,28 @@
+#!/usr/bin/env python3
+"""
+agy-screenshot - Capture an interactive screen rectangle on macOS and pipe it directly to Antigravity.
+
+Usage:
+    agy-screenshot
+    agy-screenshot "What is wrong with this UI?"
+    agy-screenshot -c "Inspect screenshot from clipboard"
+    agy-screenshot --window "Inspect this application window"
+    agy-screenshot --delay 3 "Capture dropdown menu"
+"""
+
+import sys
+from pathlib import Path
+
+SCRIPT_DIR = Path(__file__).resolve().parent
+REPO_DIR = SCRIPT_DIR.parent
+sys.path.insert(0, str(REPO_DIR / "scripts"))
+
+try:
+    from agy_client_core import run_screenshot_cli
+except ImportError:
+    real_path = Path(__file__).resolve()
+    sys.path.insert(0, str(real_path.parent.parent / "scripts"))
+    from agy_client_core import run_screenshot_cli
+
+if __name__ == "__main__":
+    run_screenshot_cli()

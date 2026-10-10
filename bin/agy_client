@@ -1,0 +1,40 @@
+#!/usr/bin/env python3
+"""
+agy_client - CLI tool to pipe external context into an active Antigravity session.
+
+Usage:
+    ls | agy_client
+    git diff | agy_client "Please review these changes"
+    pytest 2>&1 | agy_client "Why did this test fail?"
+    cat error.log | agy_client
+    agy_client "Run a quick health check"
+
+Options:
+    --session, -s <id|num> Target specific conversation ID or session index from --list
+    --clipboard, -c       Pipe image or text directly from clipboard
+    --title, -t <title>   Custom message title (default: 'Piped Context')
+    --list, -l            List active Antigravity sessions
+    --status              Check connection status to active Antigravity session
+    --raw                 Send raw content without Markdown block formatting
+    --install             Symlink agy_client into ~/.local/bin/agy_client
+    --help, -h            Show this help message
+"""
+
+import sys
+from pathlib import Path
+
+# Add scripts directory to sys.path
+SCRIPT_DIR = Path(__file__).resolve().parent
+REPO_DIR = SCRIPT_DIR.parent
+sys.path.insert(0, str(REPO_DIR / "scripts"))
+
+try:
+    from agy_client_core import run_cli
+except ImportError:
+    # If installed via symlink in ~/.local/bin, resolve real path
+    real_path = Path(__file__).resolve()
+    sys.path.insert(0, str(real_path.parent.parent / "scripts"))
+    from agy_client_core import run_cli
+
+if __name__ == "__main__":
+    run_cli()

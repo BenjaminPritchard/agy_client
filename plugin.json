@@ -1,0 +1,6 @@
+{
+  "name": "agy-client",
+  "displayName": "Antigravity Pipe Client",
+  "version": "1.0.0",
+  "description": "Pipe external context, CLI outputs, and logs directly into your active Antigravity session from another terminal window."
+}

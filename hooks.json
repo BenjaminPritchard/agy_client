@@ -1,0 +1,10 @@
+{
+  "agy-client-inbox": {
+    "PreInvocation": [
+      {
+        "type": "command",
+        "command": "./scripts/session_sync.py"
+      }
+    ]
+  }
+}
